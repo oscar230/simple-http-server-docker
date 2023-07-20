@@ -1,0 +1,22 @@
+kind: pipeline
+type: docker
+name: build
+
+steps:
+- name: docker-build-and-publish
+  image: plugins/docker
+  settings:
+    tags:
+    - latest
+    username:
+      from_secret: docker-username
+    password:
+      from_secret: docker-password
+    repo:
+      from_secret: docker-repo
+    registry:
+      from_secret: docker-registry
+
+trigger:
+  event:
+  - push
